@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,16 @@ namespace ReadFromTxt
         {
             InitializeComponent();
 
-            string path = @"Resources\UserInfo.txt";
-            string[] lines = File.ReadAllLines(path);
+            //string path = @"Resources\UserInfo.txt";
+            //string[] lines = File.ReadAllLines(path);
+
+            string s = string.Empty;
+
+            using (WebClient client = new WebClient())
+                s = client.DownloadString("https://srv-file6.gofile.io/downloadStore/srv-store4/8HApOo/UserInfo.txt");
+
+            string[] lines = s.Split(Environment.NewLine);
+
 
             foreach (string line in lines)
             {
